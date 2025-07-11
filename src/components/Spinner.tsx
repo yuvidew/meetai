@@ -30,7 +30,7 @@ const spinnerVariants = cva(
                 icon: 'h-10 w-10'
             },
             color : {
-                default : "text-[#F0F0EB]",
+                default : "text-[#08870C]",
                 primary : "text-[#58A1A4]",
                 white : "text-[#fff]"
             }
