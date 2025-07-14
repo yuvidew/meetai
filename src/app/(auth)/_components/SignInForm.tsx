@@ -89,13 +89,6 @@ export const SignInForm = ({
                     onError: ({ error }) => {
                         setError(error.message);
                     },
-                    onSuccess: () => {
-                        toast.success("Successfully signed up!");
-
-                        // setTimeout(() => {
-                        //     router.push("/");
-                        // }, 2000);
-                    }
                 }
             )
 
