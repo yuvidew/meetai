@@ -1,5 +1,6 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { DashboardSidebar } from "./_components/dashboard-sidebar";
+import { DashboardNavbar } from "./_components/dashboard-navbar";
 
 export default function RootLayout({
     children,
@@ -11,9 +12,15 @@ export default function RootLayout({
             {/* start to dashboard side bar */}
             <DashboardSidebar/>
             {/* end to dashboard side bar */}
-            <main className="flex flex-col h-screen w-screen bg-muted">
-                {children}
-            </main>
+
+            {/* start to dashboard main content */}
+                <main className="flex flex-col h-screen w-screen bg-muted">
+                    {/* start to dashboard navbar */}
+                    <DashboardNavbar/>
+                    {/* end to dashboard navbar */}
+                    {children}
+                </main>
+            {/* end to dashboard main content */}
         </SidebarProvider>
     );
 }
