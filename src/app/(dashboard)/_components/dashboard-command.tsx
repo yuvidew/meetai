@@ -1,13 +1,13 @@
 import React from 'react'
-import { CommandDialog, CommandInput , CommandList , CommandItem} from '@/components/ui/command'
-import { DashboardCommandProps } from '../types'
+import { CommandResponsiveDialog, CommandInput , CommandList , CommandItem} from '@/components/ui/command'
+import { DashboardCommandProps } from '../types/types'
 
 export const DashboardCommand = ({
     open,
     setOpen
 }: DashboardCommandProps) => {
     return (
-        <CommandDialog
+        <CommandResponsiveDialog
             open = {open}
             onOpenChange={setOpen}
         >
@@ -20,6 +20,6 @@ export const DashboardCommand = ({
                     Text
                 </CommandItem>
             </CommandList>
-        </CommandDialog>
+        </CommandResponsiveDialog>
     )
 }
