@@ -1,5 +1,14 @@
 import { AlertCircleIcon } from 'lucide-react'
-import React from 'react'
+import React from 'react';
+
+/**
+ * ErrorState component displays a centered error message
+ * with an icon, title, and description.
+ *
+ * @param {Object} props - Component props
+ * @param {string} props.title - The main error title to display
+ * @param {string} props.description - A more detailed error description
+ */
 
 export const ErrorState = (
     {
