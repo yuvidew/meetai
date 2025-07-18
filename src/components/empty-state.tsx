@@ -3,7 +3,13 @@
 import Image from 'next/image';
 import React from 'react';
 
-
+/**
+ * EmptyState component
+ * 
+ * @param {Object} props - Component props
+ * @param {string} props.title - Title text to display
+ * @param {string} props.description - Description text to display
+ */
 export const EmptyState = (
     {
         title,

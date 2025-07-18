@@ -20,6 +20,18 @@ interface DataTableProps<TData, TValue> {
     onRowClick? : (row : TData) => void;
 }
 
+/**
+ * DataTable component
+ *
+ * @template TData - The type of each row's data
+ * @template TValue - The type of each cell's value
+ *
+ * @param {Object} props - Component props
+ * @param {ColumnDef<TData, TValue>[]} props.columns - Table column definitions
+ * @param {TData[]} props.data - Data to display in the table
+ * @param {(row: TData) => void} [props.onRowClick] - Optional callback when a row is clicked
+ */
+
 export function DataTable<TData, TValue>({
     columns,
     data,

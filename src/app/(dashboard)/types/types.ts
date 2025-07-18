@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import {inferRouterOutputs} from "@trpc/server";
 import type {AppRouter} from "@/trpc/routers/_app"
+import { SearchParams } from "nuqs";
 
 export type DashboardCommandProps = {
     open : boolean;
@@ -18,4 +19,14 @@ export type AgentFormProps = {
     onSuccess?: () => void;
     onCancel? : () => void;
     initialValues? : AgentGetOne
+}
+
+export type AgentsPageProps = {
+    searchParams : Promise<SearchParams>
+}
+
+export type DataPaginationProps = {
+    page : number;
+    totalPages : number;
+    onPageChange : (page : number) => void
 }
