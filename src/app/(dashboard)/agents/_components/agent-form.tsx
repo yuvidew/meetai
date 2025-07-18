@@ -2,7 +2,7 @@
 import React from 'react'
 import { AgentFormProps } from '../../types/types'
 import { useTRPC } from '@/trpc/client'
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button"
 import {
     Form,
     FormControl,
-    FormDescription,
+    // FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -25,20 +25,29 @@ import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 import Spinner from '@/components/Spinner';
 
+/**
+ * AgentForm component for creating or editing an agent.
+ *
+ * @param {Object} props - Component props
+ * @param {() => void} [props.onCancel] - Optional callback when cancel button is clicked
+ * @param {() => void} [props.onSuccess] - Optional callback after successful submission
+ * @param {{ id?: string, name?: string, instruction?: string }} [props.initialValues] - Optional initial values for editing
+ */
+
 export const AgentForm = ({
     onCancel,
     onSuccess,
     initialValues
 }: AgentFormProps) => {
     const trpc = useTRPC();
-    const router = useRouter();
+    // const router = useRouter();
     const queryClient = useQueryClient();
 
     const createAgent = useMutation(
         trpc.agents.create.mutationOptions({
             onSuccess: async () => { 
                 await queryClient.invalidateQueries(
-                    trpc.agents.getMany.queryOptions()
+                    trpc.agents.getMany.queryOptions({})
                 );
 
                 if(initialValues?.id){
