@@ -30,3 +30,18 @@ export type DataPaginationProps = {
     totalPages : number;
     onPageChange : (page : number) => void
 }
+
+export type AgentIdProps = {
+    params : Promise<{agentId : string}>
+}
+
+export type AgentIdViewProps = {
+    agentId : string
+}
+
+export type AgentIdViewHeaderProps = {
+    agentId : string;
+    agentName : string;
+    onEdit : () => void;
+    onRemove : () => void;
+}
