@@ -15,6 +15,11 @@ export type NewAgentDialogProps = {
 
 export type AgentGetOne = inferRouterOutputs<AppRouter>["agents"]["getOne"]
 
+export type UpdateAgentDialogProps = {
+    open : boolean,
+    onOpenChange : (open : boolean) => void,
+    initialValues : AgentGetOne;
+}
 export type AgentFormProps = {
     onSuccess?: () => void;
     onCancel? : () => void;
