@@ -13,7 +13,10 @@ export type NewAgentDialogProps = {
     onOpenChange : (open : boolean) => void
 }
 
+export type NewMeetingDialogProps = NewAgentDialogProps;
+
 export type AgentGetOne = inferRouterOutputs<AppRouter>["agents"]["getOne"]
+export type MeetingGetOne = inferRouterOutputs<AppRouter>["meetings"]["getOne"]
 
 export type UpdateAgentDialogProps = {
     open : boolean,
@@ -25,6 +28,12 @@ export type AgentFormProps = {
     onCancel? : () => void;
     initialValues? : AgentGetOne
 }
+
+export type MeetingFromProps = {
+    onSuccess?: (id? : string) => void;
+    onCancel? : () => void;
+    initialValues? : MeetingGetOne
+};
 
 export type AgentsPageProps = {
     searchParams : Promise<SearchParams>
