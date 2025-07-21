@@ -6,12 +6,12 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { useTRPC } from '@/trpc/client';
 import { Loader } from '@/components/Loader';
 import { ErrorState } from '@/components/Error-State';
-import { DataTable } from '../_components/data-table';
 import { columns } from '../_components/columns';
 import { EmptyState } from '@/components/empty-state';
 import { useAgentsFilters } from '../hooks/use-agents-filter';
-import { DataPagination } from '../_components/data-pagination';
+import { DataPagination } from '../../../../components/data-pagination';
 import { useRouter } from 'next/navigation';
+import { DataTable } from '@/components/data-table';
 
 export const AgentsView = () => {
     const router = useRouter();
