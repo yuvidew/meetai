@@ -1,5 +1,5 @@
 import React from "react";
-import { DataPaginationProps } from "../../types/types";
+import { DataPaginationProps } from "../app/(dashboard)/types/types";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
