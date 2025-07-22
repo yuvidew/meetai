@@ -1,15 +1,33 @@
 "use client";
 import { Button } from '@/components/ui/button'
-import { Plus } from 'lucide-react'
+import { Plus, XCircleIcon } from 'lucide-react'
 import { MeetingListDialog } from './meeting-dialog';
 import { useState } from 'react';
+import { MeetingsSearchFilter } from './meetings-search-filter';
+import { StatusFilter } from './status-filter';
+import { AgentIdFilter } from './Agent-id-filter';
+import { useMeetingsFilters } from '../hooks/use-meetings-filter';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+import { DEFAULT_PAGE } from '@/constants';
 // import { AgentListDialog } from './agent-dialog';
 // import { useAgentsFilters } from '../hooks/use-agents-filter';
 // import { AgentsSearchFilter } from './agents-search-filter';
 
 
 export const MeetingsListHeader = () => {
-  const [isOpen , setIsOpen] = useState(false)
+  const [isOpen , setIsOpen] = useState(false);
+  const [filters , setFilters] = useMeetingsFilters();
+
+  const isAnyFilterModified = !!filters.status || !!filters.search || !! filters.agentId;
+
+  const onClearFilters = () => {
+    setFilters({
+      status : null,
+      agentId : "",
+      search : "",
+      page : DEFAULT_PAGE
+    })
+  }
 
   return (
     <>
@@ -28,12 +46,23 @@ export const MeetingsListHeader = () => {
       </div>
       {/* end to header text and button */}
 
-      {/* start to search filter */}
-      <div className=' flex items-center gap-x-2 p-1'>
-        {/* <AgentsSearchFilter/> */}
-        TODO : filters
-      </div>
-      {/* end to search filter */}
+      {/* start to search status and agentId filter */}
+      <ScrollArea>
+        <div className=' flex items-center gap-x-2 p-1'>
+          <MeetingsSearchFilter/>
+          <StatusFilter/>
+          <AgentIdFilter/>
+
+          {isAnyFilterModified && (
+            <Button variant={"outline"} onClick={onClearFilters}>
+              <XCircleIcon className=' size-4' />
+              Clear
+            </Button>
+          )}
+        </div>
+        <ScrollBar orientation= "horizontal" />
+      </ScrollArea>
+      {/* end to search status and agentId filter */}
     </div>
     </>
   )

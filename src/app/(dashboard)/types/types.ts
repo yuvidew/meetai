@@ -15,10 +15,18 @@ export type NewAgentDialogProps = {
 
 export type NewMeetingDialogProps = NewAgentDialogProps;
 
-export type AgentGetOne = inferRouterOutputs<AppRouter>["agents"]["getOne"]
-export type AgentsGetMany = inferRouterOutputs<AppRouter>["agents"]["getMany"]["items"]
-export type MeetingGetOne = inferRouterOutputs<AppRouter>["meetings"]["getOne"]
-export type MeetingGetMany = inferRouterOutputs<AppRouter>["meetings"]["getMany"]["items"]
+export type AgentGetOne = inferRouterOutputs<AppRouter>["agents"]["getOne"];
+export type AgentsGetMany = inferRouterOutputs<AppRouter>["agents"]["getMany"]["items"];
+export type MeetingGetOne = inferRouterOutputs<AppRouter>["meetings"]["getOne"];
+export type MeetingGetMany = inferRouterOutputs<AppRouter>["meetings"]["getMany"]["items"];
+
+export enum MeetingStatus {
+    Upcoming = "upcoming",
+    Active = "active",
+    Completed = "completed",
+    Processing = "processing",
+    Cancelled = "cancelled"
+}
 
 export type UpdateAgentDialogProps = {
     open : boolean,
