@@ -33,6 +33,12 @@ export type UpdateAgentDialogProps = {
     onOpenChange : (open : boolean) => void,
     initialValues : AgentGetOne;
 }
+
+export type UpdateMeetingDialogProps = {
+    open : boolean,
+    onOpenChange : (open : boolean) => void,
+    initialValues : MeetingGetOne;
+}
 export type AgentFormProps = {
     onSuccess?: () => void;
     onCancel? : () => void;
@@ -63,9 +69,13 @@ export type AgentIdViewProps = {
     agentId : string
 }
 
-export type AgentIdViewHeaderProps = {
-    agentId : string;
-    agentName : string;
+export type MeetingIdViewProps =  {
+    meetingId : string
+}
+
+export type MeetingIdViewHeaderProps = {
+    meetingId : string;
+    meetingName : string;
     onEdit : () => void;
     onRemove : () => void;
 }
