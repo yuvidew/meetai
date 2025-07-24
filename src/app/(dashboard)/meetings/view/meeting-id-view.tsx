@@ -11,6 +11,10 @@ import { MeetingIdViewHeader } from '../_components/meeting-id-view-header'
 import { toast } from 'sonner'
 import { useConfirm } from '@/hooks/use-confirm'
 import { UpdateMeetingDialog } from '../_components/update-meeting-dialog'
+import { UpcomingState } from '../_components/upcoming-state';
+import { ProcessingState } from '../_components/processing-state';
+import { CancelledState } from '../_components/cancelled-state';
+import { ActiveState } from '../_components/active-state';
 
 export const MeetingIdView = ({ meetingId }: MeetingIdViewProps) => {
     const router = useRouter();
@@ -47,6 +51,11 @@ export const MeetingIdView = ({ meetingId }: MeetingIdViewProps) => {
         await onRemoveMeeting.mutate({id : meetingId})
     }
 
+    const isActive = data.status === "active";
+    const isUpcoming = data.status === "upcoming";
+    const isCancelled = data.status === "cancelled";
+    const isCompleted = data.status === "completed";
+    const isProcessing = data.status === "processing";
 
     return (
         <>
@@ -67,6 +76,24 @@ export const MeetingIdView = ({ meetingId }: MeetingIdViewProps) => {
                     onRemove={onHandleRemoveMeeting}
                 />
                 {/* end to meeting id header */}
+
+                {/* start to status component */}
+                {isUpcoming && 
+                    (
+                        <UpcomingState
+                            meetingId={meetingId}
+                            isCancelling = {false}
+                            onCancelMeeting={() => {}}
+                        />
+                    )
+                }
+                {isActive && (
+                    <ActiveState meetingId={meetingId} />
+                )}
+                {isProcessing && <ProcessingState/>}
+                {isCancelled && <CancelledState/>}
+                {isCompleted && <>Completed</>}
+                {/* end to status component */}
             </div>
         </>
     )
