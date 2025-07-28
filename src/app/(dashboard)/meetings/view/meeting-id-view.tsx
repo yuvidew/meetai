@@ -15,6 +15,7 @@ import { UpcomingState } from '../_components/upcoming-state';
 import { ProcessingState } from '../_components/processing-state';
 import { CancelledState } from '../_components/cancelled-state';
 import { ActiveState } from '../_components/active-state';
+import { CompletedState } from '../_components/completed-state';
 
 export const MeetingIdView = ({ meetingId }: MeetingIdViewProps) => {
     const router = useRouter();
@@ -92,7 +93,7 @@ export const MeetingIdView = ({ meetingId }: MeetingIdViewProps) => {
                 )}
                 {isProcessing && <ProcessingState/>}
                 {isCancelled && <CancelledState/>}
-                {isCompleted && <>Completed</>}
+                {isCompleted && <CompletedState data = {data} />}
                 {/* end to status component */}
             </div>
         </>
