@@ -87,3 +87,11 @@ export type MeetingIdViewHeaderProps = {
     onEdit : () => void;
     onRemove : () => void;
 }
+
+export type ChatUIProps = {
+    meetingId : string;
+    meetingName : string;
+    userId : string;
+    userName : string;
+    userImage : string | undefined
+}

@@ -9,6 +9,8 @@ import { GeneratedAvatar } from '@/components/generated-avatar';
 import { format } from 'date-fns';
 import { Badge } from '@/components/ui/badge';
 import { formatDuration } from '@/lib/utils';
+import { Transcript } from './transcript';
+import { ChatProvider } from './chat-provider';
 
 interface Props {
     data : MeetingGetOne
@@ -23,28 +25,28 @@ export const CompletedState = ({data} : Props) => {
                         <TabsList className=' p-0 bg-background justify-start rounded-none h-12' >
                             <TabsTrigger 
                                 value='summary'
-                                className=' text-muted-foreground rounded-none bg-background data-[state-active]:shadow-none border-b-2 border-transparent data-[state=active]:border-b-primary data-[state=active]:text-accent-foreground h-full hover:text-accent-foreground'
+                                className=' text-muted-foreground rounded-none bg-background data-[state-active]:shadow-none border-b-2 border-transparent border-x-white border-x-0 data-[state=active]:border-b-primary data-[state=active]:text-accent-foreground h-full hover:text-accent-foreground'
                             >
                                 <BookOpenTextIcon/>
                                 Summary
                             </TabsTrigger>
                             <TabsTrigger 
                                 value='transcript'
-                                className=' text-muted-foreground rounded-none bg-background data-[state-active]:shadow-none border-b-2 border-transparent data-[state=active]:border-b-primary data-[state=active]:text-accent-foreground h-full hover:text-accent-foreground'
+                                className=' text-muted-foreground rounded-none bg-background data-[state-active]:shadow-none border-b-2 border-transparent border-x-white border-x-0 data-[state=active]:border-b-primary data-[state=active]:text-accent-foreground h-full hover:text-accent-foreground'
                             >
                                 <FileTextIcon/>
                                 Transcript
                             </TabsTrigger>
                             <TabsTrigger 
                                 value='recording'
-                                className=' text-muted-foreground rounded-none bg-background data-[state-active]:shadow-none border-b-2 border-transparent data-[state=active]:border-b-primary data-[state=active]:text-accent-foreground h-full hover:text-accent-foreground'
+                                className=' text-muted-foreground rounded-none bg-background data-[state-active]:shadow-none border-b-2 border-transparent border-x-white border-x-0 data-[state=active]:border-b-primary data-[state=active]:text-accent-foreground h-full hover:text-accent-foreground'
                             >
                                 <FileVideoIcon/>
                                 Recording
                             </TabsTrigger>
                             <TabsTrigger 
                                 value='chat'
-                                className=' text-muted-foreground rounded-none bg-background data-[state-active]:shadow-none border-b-2 border-transparent data-[state=active]:border-b-primary data-[state=active]:text-accent-foreground h-full hover:text-accent-foreground'
+                                className=' text-muted-foreground rounded-none bg-background data-[state-active]:shadow-none border-b-2 border-transparent border-x-white border-x-0 data-[state=active]:border-b-primary data-[state=active]:text-accent-foreground h-full hover:text-accent-foreground'
                             >
                                 <SparklesIcon/>
                                 Ask Ai
@@ -53,6 +55,22 @@ export const CompletedState = ({data} : Props) => {
                         <ScrollBar orientation="horizontal" />
                     </ScrollArea>
                 </div>
+
+                {/* start to transcript  */}
+                <TabsContent value='transcript' >
+                    <Transcript meetingId={data.id} />
+                </TabsContent>
+                {/* end to transcript  */}
+
+                {/* start to chat ui */}
+                <TabsContent value='chat' >
+                    <ChatProvider 
+                        meetingId={data.id} 
+                        meetingName={data.name} 
+                    />
+                </TabsContent>
+                {/* end to chat ui */}
+
                 {/* start to recording tab content */}
                 <TabsContent value='recording'>
                     <div className=' bg-white rounded-lg border px-4 py-5'>
