@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { agents } from "@/db/schema";
-import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
+import { createTRPCRouter, premiumProcedure, protectedProcedure } from "@/trpc/init";
 import { agentsInsertSchema, agentsUpdateSchema } from "../schema";
 import { z } from "zod";
 import { and, desc, eq, getTableColumns, ilike, sql, count } from "drizzle-orm";
@@ -23,12 +23,12 @@ export const agentsRouter = createTRPCRouter({
                 )
                 .returning()
 
-                if(!updatedAgent){
-                    throw new TRPCError({
-                        code : "NOT_FOUND",
-                        message : "Agent not found"
-                    })
-                };
+            if (!updatedAgent) {
+                throw new TRPCError({
+                    code: "NOT_FOUND",
+                    message: "Agent not found"
+                })
+            };
 
             return updatedAgent;
         }),
@@ -130,15 +130,17 @@ export const agentsRouter = createTRPCRouter({
                 totalPages
             };
         }),
-    create: protectedProcedure.input(agentsInsertSchema).mutation(async ({ input, ctx }) => {
-        const [createdAgent] = await db
-            .insert(agents)
-            .values({
-                ...input,
-                userId: ctx.auth.user.id,
-            })
-            .returning();
+    create: premiumProcedure("agents")
+        .input(agentsInsertSchema)
+        .mutation(async ({ input, ctx }) => {
+            const [createdAgent] = await db
+                .insert(agents)
+                .values({
+                    ...input,
+                    userId: ctx.auth.user.id,
+                })
+                .returning();
 
-        return createdAgent;
-    })
+            return createdAgent;
+        })
 }) 
