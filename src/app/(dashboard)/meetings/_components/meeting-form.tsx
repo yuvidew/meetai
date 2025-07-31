@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { MeetingFromProps } from '../../types/types'
 import { useTRPC } from '@/trpc/client'
-// import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -27,6 +27,7 @@ import { GeneratedAvatar } from '@/components/generated-avatar';
 import { CommandSelect } from '@/components/command-select';
 import { AgentListDialog } from '../../agents/_components/agent-dialog';
 
+
 /**
  * Form component to create or update a meeting.
  *
@@ -42,7 +43,7 @@ export const MeetingForm = ({
     initialValues
 }: MeetingFromProps) => {
     const trpc = useTRPC();
-    // const router = useRouter();
+    const router = useRouter();
     const queryClient = useQueryClient();
 
     const [openNewAgentDialog , setOpenNewAgentDialog] = useState(false);
@@ -62,13 +63,17 @@ export const MeetingForm = ({
                     trpc.meetings.getMany.queryOptions({})
                 );
 
-                // TODO: Invalidate free tier usage
+                await queryClient.invalidateQueries(
+                    trpc.premium.getFreeUsage.queryOptions()
+                );
                 onSuccess?.(data.id)
             },
             onError: (error) => { 
                 toast.error(error.message);
 
-                //TODO : check is error code is "FORBIDDEN" , redirect to "/update"
+                if(error.data?.code === "FORBIDDEN"){
+                    router.push("/upgrade")
+                }
             }
         })
     );
@@ -100,7 +105,6 @@ export const MeetingForm = ({
             onError: (error) => { 
                 toast.error(error.message);
 
-                //TODO : check is error code is "FORBIDDEN" , redirect to "/update"
             }
         })
     );
